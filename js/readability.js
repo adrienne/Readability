@@ -45,8 +45,8 @@ var readability = {
      **/
     regexps: {
         unlikelyCandidates:    /combx|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|tweet|twitter/i,
-        okMaybeItsACandidate:  /and|article|body|comment|column|main|shadow/i,
-        positive:              /article|body|content|comment|entry|hentry|main|page|pagination|post|text|blog|story/i,
+        okMaybeItsACandidate:  /and|article|body|column|main|shadow/i,
+        positive:              /article|body|content|entry|hentry|main|page|pagination|post|text|blog|story/i,
         negative:              /combx|com-|contact|foot|footer|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget/i,
         extraneous:            /print|archive|discuss|e[\-]?mail|share|reply|all|login|sign|single/i,
         divToPElements:        /<(a|blockquote|dl|div|img|ol|p|pre|table|ul)/i,
@@ -133,6 +133,7 @@ var readability = {
         /* Glue the structure of our document together. */
         innerDiv.appendChild( articleTitle   );
         innerDiv.appendChild( articleContent );
+        innerDiv.appendChild( articleComments );
         innerDiv.appendChild( articleFooter  );
          overlay.appendChild( articleTools   );
          overlay.appendChild( innerDiv       );
@@ -838,6 +839,7 @@ var readability = {
          * and find the one with the highest score.
         **/
         var topCandidate = null;
+    	
         for(var c=0, cl=candidates.length; c < cl; c+=1)
         {
             /**
